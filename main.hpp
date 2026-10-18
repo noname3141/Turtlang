@@ -33,7 +33,7 @@ public:
 	};
 };
 
-int rad(int theta);//i have to convert theta to rad to pass in through the sin and cos fns
+float rad(int theta);//i have to convert theta to rad to pass in through the sin and cos fns
 std::pair<int, int> new_pos(Turtle& turt, int distance);
 void vislog(std::vector<std::pair<int, int>>& v, Turtle& turt, std::pair<int, int> np);
 void forward(std::vector<std::pair<int, int>>& v, Turtle& turt,int distance);

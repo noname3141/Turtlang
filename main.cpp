@@ -1,7 +1,7 @@
 #include "main.hpp"
 
-int rad(int theta){
-	return (int)((PI/180.0)*(float)theta);
+float rad(int theta){
+	return ((float)(PI/180.0)*(float)theta);
 }
 
 std::pair<int, int> new_pos(Turtle& turt, int d){
