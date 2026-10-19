@@ -64,7 +64,7 @@ struct token {
 	TokenType type;
 	double val;
 	int line;
-}
+};
 
 class Lexer{
 private:
@@ -74,7 +74,37 @@ private:
 	int line = 1;
 	int col = 1;
 public:
-	explicit Lexer(std::string source){}
-}
+	explicit Lexer(std::string source) : source(std::move(source)){}; //to move the source into the source field the moment we pass it as an argument to lexer i.e. lexer(string);
+
+	bool is_at_end(){
+		return current >= source.size();
+	};
+
+	char advance(){
+		if(is_at_end())return '\0';
+		char c = source[current++];
+		if(c== '\n'){
+			line++;
+			col = 1;
+		}
+		else{
+			col++;
+		}
+		return c;
+	};
+
+	char peek(){
+		if(is_at_end()) return '\0';
+		return source[current];
+	};
+	
+	char peek_next(){
+		if(current + 1 >= source.length()) return '\0';
+		return source[current + 1];
+	};
+};
+
+
+
 
 #endif
