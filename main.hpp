@@ -60,11 +60,11 @@ enum class TokenType{
 	END_OF_FILE, INVALID
 };
 
-struct token {
+typedef struct token {
 	TokenType type;
 	double val;
 	int line;
-};
+} Token;
 
 class Lexer{
 private:
@@ -102,6 +102,46 @@ public:
 		if(current + 1 >= source.length()) return '\0';
 		return source[current + 1];
 	};
+
+	void skip_white_spaces_and_comments(){
+		while(!is_at_end()){
+			char c = peek();
+			switch(c){
+				case ' ':
+				case '\r':
+				case '\t':
+				case '\n':
+					advance();
+					break;
+				case '/':{
+					char nx = peek_next(); 
+					if(nx == '/'){
+						while(!is_at_end() && peek() != '\n'){
+							advance();
+						}
+					}
+					else if(nx == '*'){
+						advance();
+						advance();
+						while(!is_at_end() && !(peek() == '*' && peek_next() == '/')){
+							advance();
+						}
+						if(!is_at_end()){
+							advance();
+							advance();
+						}
+					}
+					else{
+						return;
+					}
+					break;
+					};
+				default:
+					return;
+			}
+		}
+	}
+
 };
 
 
