@@ -4,6 +4,14 @@ float rad(int theta){
 	return ((float)(PI/180.0)*(float)theta);
 }
 
+void penup(Turtle& turt){
+	turt.pen_down = false;
+}
+
+void pendown(Turtle& turt){
+	turt.pen_down = true;
+}
+
 std::pair<int, int> new_pos(Turtle& turt, int d){
 	int dx = std::round(d*std::cos(rad(turt.theta)));
 	int dy = std::round(d*std::sin(rad(turt.theta)));

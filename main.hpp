@@ -34,9 +34,47 @@ public:
 };
 
 float rad(int theta);//i have to convert theta to rad to pass in through the sin and cos fns
+
 std::pair<int, int> new_pos(Turtle& turt, int distance);
+
 void vislog(std::vector<std::pair<int, int>>& v, Turtle& turt, std::pair<int, int> np);
+
 void forward(std::vector<std::pair<int, int>>& v, Turtle& turt,int distance);
+
+void penup(Turtle& turt);
+
+void pendown(Turtle& turt);
+
 void turn(Turtle& turt, int theta);
+
+//parser logic
+
+enum class TokenType{
+	//commands
+	FORWARD, BACK, TURN, PENUP, PENDOWN, REPEAT,
+	//literals
+	NUMBER,
+	//delimiters
+	LBRACKET, RBRACKET,
+	//control
+	END_OF_FILE, INVALID
+};
+
+struct token {
+	TokenType type;
+	double val;
+	int line;
+}
+
+class Lexer{
+private:
+	std::string source;
+	size_t start = 0; //start of the current lexeme being scanned
+	size_t current = 0;//current read idx
+	int line = 1;
+	int col = 1;
+public:
+	explicit Lexer(std::string source){}
+}
 
 #endif
